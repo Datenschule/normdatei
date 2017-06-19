@@ -8,6 +8,10 @@ class TestFingerprint(unittest.TestCase):
         result = fingerprint(None)
         assert result is None
 
+    def test_empty_string(self):
+        result = fingerprint("")
+        assert result is None
+
     def test_remove_title(self):
         names = ["Dr Jakob Maria Mierscheid",
                  "Dr. h.c. Jakob Maria Mierscheid",

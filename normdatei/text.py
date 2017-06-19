@@ -41,7 +41,7 @@ def clean_name(name):
 
 
 def fingerprint(name):
-    if name is None:
+    if not name:
         return
     name = FP_REMOVE.sub(' ', name.strip())
     return normalize(name).replace(' ', '-')
