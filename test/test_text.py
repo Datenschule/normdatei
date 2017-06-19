@@ -34,6 +34,7 @@ class TestCleanText(object):
         ("Bundeskanzler Jakob Mierscheid"),
         ("Bundeskanzlerin Jakob Mierscheid"),
         ("Parl. Staatssekretärin Jakob Mierscheid"),
+        ("Alterspräsident Jakob Mierscheid"),
     ])
     def test_remove_title(self, test_input):
         assert clean_name(test_input) == "Jakob Mierscheid"
