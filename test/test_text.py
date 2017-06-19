@@ -24,24 +24,24 @@ class TestFingerprint(unittest.TestCase):
 
 class TestCleanText(object):
     @parametrize("test_input", [
-        ("Zuruf"),
-        ("Zurufe"),
+        "Zuruf",
+        "Zurufe",
     ])
     def test_remove_poi(self, test_input):
         assert clean_name(test_input) == ""
 
     @pytest.mark.parametrize("test_input", [
-        ("Bundeskanzler Jakob Mierscheid"),
-        ("Bundeskanzlerin Jakob Mierscheid"),
-        ("Parl. Staatssekretärin Jakob Mierscheid"),
-        ("Alterspräsident Jakob Mierscheid"),
+        "Bundeskanzler Jakob Mierscheid",
+        "Bundeskanzlerin Jakob Mierscheid",
+        "Parl. Staatssekretärin Jakob Mierscheid",
+        "Alterspräsident Jakob Mierscheid",
     ])
     def test_remove_title(self, test_input):
         assert clean_name(test_input) == "Jakob Mierscheid"
 
     @pytest.mark.parametrize("test_input", [
-        ("Volker Kauder [CDU/CSU]"),
-        ("Volker Kauder (CDU/CSU)"),
+        "Volker Kauder [CDU/CSU]",
+        "Volker Kauder (CDU/CSU)",
     ])
     def test_remove_party(self, test_input):
         assert clean_name(test_input) == "Volker Kauder"
