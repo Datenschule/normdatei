@@ -11,7 +11,7 @@ NAME_REMOVE = [u'\\[.*\\]|\\(.*\\)', u'( de[sr])? Abg.? ',
                u', Staatsmin.*', u', Bundesmin.*', u', Ministe.*',
                u'Staatsministers', 'Bundesministers',
                u'Parl. Staatssekretärin',
-               u'Ge ?genruf', 'Weiterer Zuruf', 'Zuruf', 'Weiterer',
+               u'Ge ?genruf', 'Weiterer Zuruf', 'Zurufe?', 'Weiterer',
                u', zur.*', u', auf die', u' an die', u', an .*', u'gewandt']
 NAME_REMOVE = re.compile(u'(%s)' % '|'.join(NAME_REMOVE), re.U)
 DE_HYPHEN = re.compile(r'([a-z])-([a-z])', re.U)
