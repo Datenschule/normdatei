@@ -37,3 +37,10 @@ class TestCleanText(object):
     ])
     def test_remove_title(self, test_input):
         assert clean_name(test_input) == "Jakob Mierscheid"
+
+    @pytest.mark.parametrize("test_input", [
+        ("Volker Kauder [CDU/CSU]"),
+        ("Volker Kauder (CDU/CSU)"),
+    ])
+    def test_remove_party(self, test_input):
+        assert clean_name(test_input) == "Volker Kauder"
