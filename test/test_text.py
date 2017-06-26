@@ -2,8 +2,10 @@
 import unittest
 import pytest
 
-from normdatei.text import fingerprint, clean_name
+from normdatei.text import fingerprint, clean_name, extract_agend_numbers
+
 parametrize = pytest.mark.parametrize
+
 
 class TestFingerprint(unittest.TestCase):
     def test_none(self):
@@ -45,3 +47,41 @@ class TestCleanText(object):
     ])
     def test_remove_party(self, test_input):
         assert clean_name(test_input) == "Volker Kauder"
+
+
+class TestExtractAgendaNumbers(object):
+    @parametrize("test_text, result", [
+        (u'5 auf', ['5']),
+        (u'7 sowie 8 und 9', ['7', '8', '9']),
+    ])
+    def test_simple_arabic(self, test_text, result):
+        assert extract_agend_numbers(test_text) == result
+
+    @parametrize("test_text, result", [
+        (u'VI auf', ['VI']),
+        (u'II und Tagesordnungspunkt III', ['II', 'III']),
+    ])
+    def test_simple_roman(self, test_text, result):
+        assert extract_agend_numbers(test_text) == result
+
+    @parametrize("test_text, result", [
+        (u'5 und 5 a', ['5', '5 a']),
+        (u'5 a und 6 c', ['5 a', '6 c']),
+    ])
+    def test_extended_arabic(self, test_text, result):
+        assert extract_agend_numbers(test_text) == result
+
+    @parametrize("test_text, result", [
+        # (u'V a bis V d auf', ['V a', 'V b', 'V c', 'V d']),
+        (u'V c', ['V c']),
+        (u'V c und V d', ['V c', 'V d']),
+    ])
+    def test_extended_roman(self, test_text, result):
+        assert extract_agend_numbers(test_text) == result
+
+    @parametrize("test_text, result", [
+        (u'II.18 auf', ['II.18']),
+        (u'II.19 auf und II.20', ['II.19', 'II.20']),
+    ])
+    def test_extended_roman(self, test_text, result):
+        assert extract_agend_numbers(test_text) == result

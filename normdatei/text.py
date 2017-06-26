@@ -45,3 +45,18 @@ def fingerprint(name):
         return
     name = FP_REMOVE.sub(' ', name.strip())
     return normalize(name).replace(' ', '-')
+
+
+def extract_agend_numbers(text):
+    roman_number = re.compile("[XIV]+(?:\.\d+)")
+    roman = re.compile("([XIV]+(?: \w(?!\w))?)")
+    arabic_letter = re.compile("\d+(?: \w(?!\w))?")
+
+    roman_number_matches = roman_number.findall(text)
+    text = roman_number.sub('', text)
+
+    roman_matches = roman.findall(text)
+
+    arabic_letter_matches = arabic_letter.findall(text)
+
+    return roman_number_matches + arabic_letter_matches + roman_matches
