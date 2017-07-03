@@ -42,7 +42,7 @@ def fingerprint(name):
     return normalize(name).replace(' ', '-')
 
 
-def extract_agend_numbers(text):
+def extract_agenda_numbers(text):
     roman_number = re.compile("[XIV]+(?:\.\d+)")
     roman = re.compile("([XIV]+(?: \w(?!\w))?)")
     arabic_letter = re.compile("\d+(?: \w(?!\w))?")
