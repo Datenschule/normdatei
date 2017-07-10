@@ -43,8 +43,8 @@ def fingerprint(name):
 
 
 def extract_agenda_numbers(text):
-    roman_number = re.compile("[XIV]+(?:\.\d+)")
-    roman = re.compile("([XIV]+(?: \w(?!\w))?)")
+    roman_number = re.compile("[XIV]+(?:\.\d+)(?!\w)")
+    roman = re.compile("([XIV]+)(?!\w)")
     arabic_letter = re.compile("\d+(?: \w(?!\w))?")
 
     roman_number_matches = roman_number.findall(text)
