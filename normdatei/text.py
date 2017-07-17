@@ -1,5 +1,7 @@
 # coding: utf-8
 import re
+
+import normality
 from normality import normalize
 
 FP_REMOVE = re.compile(u'(^.*Dr.?( h.? ?c.?)?| (von( der)?)| [A-Z]\. )')
@@ -43,10 +45,13 @@ def fingerprint(name):
 
 
 def extract_agenda_numbers(text):
-    roman_number = re.compile("[XIV]+(?:\.\d+)(?!\w)")
-    roman = re.compile("([XIV]+)(?!\w)")
-    arabic_letter = re.compile("\d+(?: \w(?!\w))?")
+    roman_number = re.compile("[XIV]+(?:\.\d+)(?!\w)", re.UNICODE)
+    roman = re.compile("([XIV]+)(?!\w)", re.UNICODE)
+    arabic_letter = re.compile("\d+(?:\s\w(?!\w))?", re.UNICODE)
 
+    # sometimes there are non breaking spaces. We replace those
+    # with regular spaces to later ease the matching
+    text = normality.collapse_spaces(text)
     roman_number_matches = roman_number.findall(text)
     text = roman_number.sub('', text)
 

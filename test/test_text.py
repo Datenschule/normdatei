@@ -67,6 +67,8 @@ class TestExtractAgendaNumbers(object):
     @parametrize("test_text, result", [
         (u'5 und 5 a', ['5', '5 a']),
         (u'5 a und 6 c', ['5 a', '6 c']),
+        (u'22 h:', ['22 h']),  # <- this contains a non breaking space character
+        (u' 5 c:', ['5 c']),
     ])
     def test_extended_arabic(self, test_text, result):
         assert extract_agenda_numbers(test_text) == result
