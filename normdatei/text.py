@@ -49,9 +49,14 @@ def extract_agenda_numbers(text):
     roman = re.compile("([XIV]+)(?!\w)", re.UNICODE)
     arabic_letter = re.compile("\d+(?:\s\w(?!\w))?", re.UNICODE)
 
+    drucksache_pattern = re.compile('\d+\/\d+')
+
     # sometimes there are non breaking spaces. We replace those
     # with regular spaces to later ease the matching
     text = normality.collapse_spaces(text)
+
+    # remove numbers that come from a Drucksache such as 18/603
+    text = drucksache_pattern.sub('', text)
     roman_number_matches = roman_number.findall(text)
     text = roman_number.sub('', text)
 
