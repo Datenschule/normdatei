@@ -92,6 +92,7 @@ class TestExtractAgendaNumbers(object):
         (u'ist der Herr Ingo Müller', []),
         (u'redet jetzt noch Victor Hugo', []),
         (u'Drucksache 18/608', []),
+        (u'vom Bündnis 90/Die Grünen', []),
     ])
     def test_nomatch_roman(self, test_text, result):
         assert extract_agenda_numbers(test_text) == result

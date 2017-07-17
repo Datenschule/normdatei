@@ -43,20 +43,25 @@ def fingerprint(name):
     name = FP_REMOVE.sub(' ', name.strip())
     return normalize(name).replace(' ', '-')
 
-
-def extract_agenda_numbers(text):
-    roman_number = re.compile("[XIV]+(?:\.\d+)(?!\w)", re.UNICODE)
-    roman = re.compile("([XIV]+)(?!\w)", re.UNICODE)
-    arabic_letter = re.compile("\d+(?:\s\w(?!\w))?", re.UNICODE)
-
-    drucksache_pattern = re.compile('\d+\/\d+')
+def _remove_non_top_numbers(text):
+    slash_pattern = re.compile('\d+\/(\S+)')
 
     # sometimes there are non breaking spaces. We replace those
     # with regular spaces to later ease the matching
     text = normality.collapse_spaces(text)
 
     # remove numbers that come from a Drucksache such as 18/603
-    text = drucksache_pattern.sub('', text)
+    # or from The Greens (Bündnis 90/die Grünen)
+    text = slash_pattern.sub('', text)
+    return text
+
+def extract_agenda_numbers(text):
+    roman_number = re.compile("[XIV]+(?:\.\d+)(?!\w)", re.UNICODE)
+    roman = re.compile("([XIV]+)(?!\w)", re.UNICODE)
+    arabic_letter = re.compile("\d+(?:\s\w(?!\w))?", re.UNICODE)
+
+    text = _remove_non_top_numbers(text)
+
     roman_number_matches = roman_number.findall(text)
     text = roman_number.sub('', text)
 
