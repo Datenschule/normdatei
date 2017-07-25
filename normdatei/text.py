@@ -12,7 +12,7 @@ NAME_REMOVE = [u'\\[.*\\]|\\(.*\\)', u'( de[sr])? Abg.? ',
                u'Liedvortrag', u'Bundeskanzler(in)?', u', Parl\\. .*',
                u', Staatsmin.*', u', Bundesmin.*', u', Ministe.*',
                u'Staatsministers', 'Bundesministers',
-               u'Parl. Staatssekretärin',
+               u'Parl. Staatssekretärin', u', Wehrbeauftragter.*',
                u'Ge ?genruf', 'Weiterer Zuruf', 'Zurufe?', 'Weiterer',
                u', zur.*', u', auf die', u' an die', u', an .*', u'gewandt']
 NAME_REMOVE = re.compile(u'(%s)' % '|'.join(NAME_REMOVE), re.U)

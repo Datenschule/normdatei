@@ -42,6 +42,14 @@ class TestCleanText(object):
         assert clean_name(test_input) == "Jakob Mierscheid"
 
     @pytest.mark.parametrize("test_input", [
+        "Bundeskanzler Jakob Mierscheid",
+        "Bundeskanzlerin Jakob Mierscheid",
+        u"Jakob Mierscheid, Wehrbeauftragter des Deutschen Bundestages",
+    ])
+    def test_remove_suffix(self, test_input):
+        assert clean_name(test_input) == "Jakob Mierscheid"
+
+    @pytest.mark.parametrize("test_input", [
         "Volker Kauder [CDU/CSU]",
         "Volker Kauder (CDU/CSU)",
     ])
