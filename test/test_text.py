@@ -19,6 +19,7 @@ class TestFingerprint(unittest.TestCase):
     def test_remove_title(self):
         names = ["Dr Jakob Maria Mierscheid",
                  "Dr. h.c. Jakob Maria Mierscheid",
+                 "HonD Jakob Maria Mierscheid",
                  "Jakob Maria Mierscheid"]
         normalized = {fingerprint(name) for name in names}
         self.assertEqual(normalized, {"jakob-maria-mierscheid"})

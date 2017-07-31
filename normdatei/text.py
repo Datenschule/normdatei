@@ -4,7 +4,7 @@ import re
 import normality
 from normality import normalize
 
-FP_REMOVE = re.compile(u'(^.*Dr\.?( h\.? ?c\.?)?| (von( der)?)| [A-Z]\. )')
+FP_REMOVE = re.compile(u'(^.*Dr\.?( h\.? ?c\.?)?| (von( der)?)|(HonD)| [A-Z]\. )')
 
 NAME_REMOVE = [u'\\[.*\\]|\\(.*\\)', u'( de[sr])? Abg.? ',
                u'Vizepräsidentin', u'Vizepräsident', u'Präsident',
