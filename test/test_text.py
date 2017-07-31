@@ -45,6 +45,8 @@ class TestCleanText(object):
         "Bundeskanzler Jakob Mierscheid",
         "Bundeskanzlerin Jakob Mierscheid",
         u"Jakob Mierscheid, Wehrbeauftragter des Deutschen Bundestages",
+        u"Jakob Mierscheid, Beauftragter der Bundesregierung für die neuen Bundesländer",
+        u"Jakob Mierscheid, Beauftragte der Bundesregierung für die neuen Bundesländer",
     ])
     def test_remove_suffix(self, test_input):
         assert clean_name(test_input) == "Jakob Mierscheid"
