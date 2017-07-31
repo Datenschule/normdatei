@@ -13,7 +13,7 @@ NAME_REMOVE = [u'\\[.*\\]|\\(.*\\)', u'( de[sr])? Abg.? ',
                u', Staatsmin.*', u', Bundesmin.*', u', Ministe.*',
                u'Staatsministers', 'Bundesministers',
                u'Parl. Staatssekretärin', u', Wehrbeauftragter.*',
-               u', Beauftragter? der .*',
+               u', Beauftragter? der .*', u', Erster Bürgermeister.*',
                u'Ge ?genruf', 'Weiterer Zuruf', 'Zurufe?', 'Weiterer',
                u', zur.*', u', auf die', u' an die', u', an .*', u'gewandt']
 NAME_REMOVE = re.compile(u'(%s)' % '|'.join(NAME_REMOVE), re.U)
@@ -44,6 +44,7 @@ def fingerprint(name):
     name = FP_REMOVE.sub(' ', name.strip())
     return normalize(name).replace(' ', '-')
 
+
 def _remove_non_top_numbers(text):
     slash_pattern = re.compile('\d+\/(\S+)')
 
@@ -55,6 +56,7 @@ def _remove_non_top_numbers(text):
     # or from The Greens (Bündnis 90/die Grünen)
     text = slash_pattern.sub('', text)
     return text
+
 
 def extract_agenda_numbers(text):
     roman_number = re.compile("[XIV]+(?:\.\d+)(?!\w)", re.UNICODE)
